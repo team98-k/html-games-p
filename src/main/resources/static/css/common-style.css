@@ -1,0 +1,50 @@
+.game-container {
+    display: flex;
+}
+
+.game {
+    width: 50%;
+    height: 500px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameSet {
+	margin-top: 20px;
+	display: flex;
+	gap: 10px;
+}
+
+.gameSet input {
+	padding: 5px;
+	border: 1px solid #b5b5b5;
+	border-radius: 5px;
+	outline: none;
+}
+
+.gameSet button {
+	padding: 5px 10px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.gameSet button:hover {
+	background-color: #2980b9;
+}
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.game {
+    display: none;
+}

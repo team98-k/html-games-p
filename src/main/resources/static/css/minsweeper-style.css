@@ -1,0 +1,115 @@
+.game-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 50px auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+#mineBoard {
+    background-image: url('../imgs/minesweeper-background.jpg');
+    text-align: center;
+}
+
+#mineBoard table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+#mineBoard td {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.gameSet {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.gameSet input[type="number"] {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.gameSet button {
+    padding: 5px 15px;
+    margin-left: 10px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.gameSet button:hover {
+    background-color: #555; 
+}
+
+.pointSaved button {
+    padding: 5px 5px;
+    margin-left: 520px;
+    background-color: rgb(80, 180, 185);  
+    color: rgb(0, 0, 0);
+    border-radius: 5px; 
+}
+
+.pointSaved button:hover {
+    background-color: #faf602; 
+}
+
+
+
+/* 테이블 스타일 */
+#scoreBoard {
+    display: none; 
+    position: absolute;
+    top: 50px;
+    right: 100px;
+}
+
+#scoreBoard, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* 테이블 헤더 스타일 */
+th {
+    background-color: #333;
+    color: white;
+}
+
+
+/* 순위 열 스타일 */
+td:first-child {
+    font-weight: bold;
+    color: #ff9900;
+}
+
+/* 포인트 열 스타일 */
+td:nth-child(2) {
+    font-weight: bold;
+    color: #009900;
+}
+
+/* 유저 이름 열 스타일 */
+td:nth-child(3) {
+    font-weight: bold;
+    color: #0000ff;
+}
+
+
+
+

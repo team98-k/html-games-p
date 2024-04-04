@@ -1,0 +1,88 @@
+canvas {
+	background: url('../imgs/breakoutBg.jpeg');
+    background-size: cover;
+	display: block;
+	margin: 0 auto;
+    width: 900px;
+}
+
+/* 게임 시작 버튼 스타일 */
+#startGame {
+    width: 50x;
+    height: 30px;
+    background-color: black; 
+    color: white;
+    font-size: 16px;
+    border: 3px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#scoreSave {
+    width: 50x;
+    height: 30px;
+    margin-top: 1px;
+    background-color: black; 
+    color: white;
+    font-size: 16px;
+    border: 3px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+#viewScoreboard {
+    width: auto;
+    height: 30px;
+    margin-top: 1px;
+    background-color: black; 
+    color: white;
+    font-size: 16px;
+    border: 3px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 130px;
+    font-size: 16px;
+    display: none; /* 초기에는 테이블을 숨깁니다. */
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* 테이블 헤더 스타일 */
+th {
+    background-color: #333;
+    color: white;
+}
+
+
+/* 순위 열 스타일 */
+td:first-child {
+    font-weight: bold;
+    color: #ff9900;
+}
+
+/* 포인트 열 스타일 */
+td:nth-child(2) {
+    font-weight: bold;
+    color: #009900;
+}
+
+/* 유저 이름 열 스타일 */
+td:nth-child(3) {
+    font-weight: bold;
+    color: #0000ff;
+}
+

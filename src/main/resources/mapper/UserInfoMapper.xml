@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.team1.mapper.UserInfoMapper">
+	<select id="selectUserInfos" resultType="com.game.team1.vo.UserInfoVO">
+		SELECT UI_NUM, UI_ID, UI_NAME, UI_MOBILE, UI_EMAIL, UI_BIRTH 
+		FROM USER_INFO
+		<where>
+			<if test='uiName != null and uiName != ""'>
+				AND UI_NAME LIKE CONCAT('%',#{uiName},'%')
+			</if>
+			<if test='uiNum != 0'>
+				AND UI_NUM = #{uiNum}
+			</if>
+			<if test='uiId != null and uiId != ""'>
+				AND UI_ID = #{uiId}
+			</if>
+		</where>
+	</select>
+	<select id="selectUserInfo" resultType="com.game.team1.vo.UserInfoVO">
+		SELECT UI_NUM, UI_NAME, UI_ID, UI_MOBILE, UI_EMAIL, UI_BIRTH, CREDAT, LMODAT
+		FROM USER_INFO
+		WHERE UI_NUM = #{uiNum}
+	</select>
+	<select id="selectUserInfoByIdAndPwd" resultType="com.game.team1.vo.UserInfoVO">
+		SELECT UI_NUM, UI_NAME, UI_ID
+		FROM USER_INFO
+		WHERE UI_ID = #{uiId} 
+		AND UI_PWD = #{uiPwd}
+	</select>
+	<insert id="insertUserInfo" parameterType="com.game.team1.vo.UserInfoVO">
+		INSERT INTO USER_INFO(UI_ID, UI_PWD, UI_NAME, UI_MOBILE, UI_EMAIL, UI_BIRTH, LMODAT)
+		VALUES(#{uiId},#{uiPwd},#{uiName},#{uiMobile},#{uiEmail},#{uiBirth},DATE_FORMAT(NOW(),'%Y%m%d'))
+	</insert>
+	<update id="updateUserInfo" parameterType="com.game.team1.vo.UserInfoVO">
+		UPDATE USER_INFO
+		SET UI_NAME=#{uiName},
+		UI_PWD=#{uiPwd},
+		UI_MOBILE=#{uiMobile},
+		UI_EMAIL=#{uiEmail},
+		UI_BIRTH=#{uiBirth},
+		LMODAT=DATE_FORMAT(NOW(),'%Y%m%d')
+		WHERE UI_NUM=#{uiNum}
+	</update>
+	<delete id="deleteUserInfo" parameterType="com.game.team1.vo.UserInfoVO">
+		DELETE FROM USER_INFO WHERE UI_NUM=#{uiNum}
+	</delete>
+	
+</mapper>

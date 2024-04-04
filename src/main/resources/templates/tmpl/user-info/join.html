@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script th:src="@{/js/common-js.js}"></script>
+    <link th:href="@{/css/join-style.css}" rel="stylesheet">
+</head>
+
+<body>
+
+    <table border="1">
+        <tr>
+            <td>아이디 : <input type="text" id="uiId"></td>
+        </tr>
+        <tr>
+            <td>비밀번호 : <input type="text" id="uiPwd"></td>
+        </tr>
+        <tr>
+            <td>이름 : <input type="text" id="uiName"></td>
+        </tr>
+        <tr>
+            <td>핸드폰 : <input type="text" id="uiMobile"></td>
+        </tr>
+        <tr>
+            <td>이메일 : <input type="text" id="uiEmail"></td>
+        </tr>
+        <tr>
+            <td>생일 : <input type="date" id="uiBirth"></td>
+        </tr>
+        <tr>
+            <td><button onclick="join()" id="btn">회원가입</button></td>
+        </tr>
+    </table>
+
+    <script>
+        async function join() {
+            const data = getJsonFromData();
+
+            const response = await fetch('/user-infos', {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                }
+            });
+            const msg = await response.json();
+            console.log(msg);
+            alert(msg.msg);
+            if (msg.url) {
+                location.href = msg.url;
+            }
+        }
+    </script>
+</body>
+
+</html>

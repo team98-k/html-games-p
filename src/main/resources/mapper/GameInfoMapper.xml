@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.team1.mapper.GameInfoMapper">
+	<select id="selectGameInfos" resultType="com.game.team1.vo.GameInfoVO">
+		SELECT GI_NUM, GI_NAME, GI_DESC, CREDAT, LMODAT, ACTIVE 
+		FROM GAME_INFO
+		<where>
+			<if test='giName != null and giName != ""'>
+				AND GI_NAME LIKE CONCAT('%',#{giName},'%')
+			</if>
+			<if test='giNum != 0'>
+				AND GI_NUM = #{giNum}
+			</if>
+		</where>
+	</select>
+	<select id="selectGameInfo" resultType="com.game.team1.vo.GameInfoVO">
+		SELECT GI_NUM, GI_NAME, GI_DESC, CREDAT, LMODAT, ACTIVE 
+		FROM GAME_INFO
+		WHERE GI_NUM = #{giNum}
+	</select>
+	<insert id="insertGameInfo" parameterType="com.game.team1.vo.GameInfoVO">
+		INSERT INTO GAME_INFO (GI_NAME, GI_DESC)
+		VALUES(#{giName}, #{giDesc})
+	</insert>
+	<update id="updateGameInfo" parameterType="com.game.team1.vo.GameInfoVO">
+		UPDATE GAME_INFO
+		SET GI_NAME=#{giName},
+		GI_DESC=#{giDesc},
+		LMODAT=DATE_FORMAT(NOW(),'%Y%m%d')
+		WHERE GI_NUM=#{giNum}
+	</update>
+	<delete id="deleteGameInfo" parameterType="com.game.team1.vo.GameInfoVO">
+		DELETE FROM GAME_INFO WHERE GI_NUM=#{giNum}
+	</delete>
+	
+</mapper>

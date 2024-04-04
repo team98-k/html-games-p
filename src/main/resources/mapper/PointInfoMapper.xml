@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.team1.mapper.PointInfoMapper">
+	<select id="selectPointInfos" resultType="com.game.team1.vo.PointInfoVO">
+		SELECT  PI.*, GI.GI_NAME, UI.UI_NAME FROM POINT_INFO PI
+		LEFT JOIN GAME_INFO GI ON PI.GI_NUM = GI.GI_NUM
+		LEFT JOIN USER_INFO UI ON PI.UI_NUM = UI.UI_NUM
+		WHERE PI.GI_NUM=#{giNum}
+		ORDER BY PI.PI_POINT DESC LIMIT 10
+	</select>
+	<select id="selectPointInfo" resultType="com.game.team1.vo.PointInfoVO">
+		SELECT  PI.*, GI.GI_NAME, UI.UI_NAME FROM POINT_INFO PI
+		LEFT JOIN GAME_INFO GI ON PI.GI_NUM = GI.GI_NUM
+		LEFT JOIN USER_INFO UI ON PI.UI_NUM = UI.UI_NUM
+		WHERE PI.GI_NUM=#{giNum} AND UI.UI_NUM=#{uiNum}
+		ORDER BY PI.PI_POINT DESC LIMIT 1
+	</select>
+	<insert id="insertPointInfo" parameterType="com.game.team1.vo.PointInfoVO">
+		INSERT INTO POINT_INFO(GI_NUM, UI_NUM, PI_POINT, CREDAT)
+		VALUES(#{giNum}, #{uiNum}, #{piPoint}, DATE_FORMAT(NOW(),'%Y%m%d'))
+	</insert>
+	<update id="updatePointInfo" parameterType="com.game.team1.vo.PointInfoVO">
+		UPDATE POINT_INFO
+		SET PI_POINT=#{piPoint},
+		LMODAT=DATE_FORMAT(NOW(),'%Y%m%d')
+		WHERE PI_NUM=#{piNum}
+	</update>
+	<delete id="deletePointInfo" parameterType="com.game.team1.vo.PointInfoVO">
+		DELETE FROM POINT_INFO WHERE PI_NUM=#{piNum}
+	</delete>
+</mapper>

@@ -1,0 +1,236 @@
+#controls img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+#controls {
+    width: 500px;
+    height: 110px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#container {
+    border: 10px double white;
+    height: 700px;
+    width: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('../imgs/puzzle-arrows/sky.jpg');
+    z-index: 0;
+    background-size: cover;
+    border-radius: 20%;
+}
+
+#score {
+    color: rgb(189, 164, 237);
+    position: absolute;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    top: calc(19%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 60px;
+    letter-spacing: 7px;
+    font-weight: bold;
+}
+
+#round {
+    color: yellowgreen;
+    position: absolute;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    top: calc(10%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 60px;
+    letter-spacing: 7px;
+    font-weight: bold;
+}
+
+#timer {
+    color: aqua;
+    position: absolute;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    top: calc(30% - 20px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 50px;
+    letter-spacing: 7px;
+    font-family: 'Press Start 2P';
+    animation: timer 0.01ms infinite;
+    font-weight: bold;
+}
+
+#startBtn {
+    color: transparent;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    height: 125px;
+    background-image: url('../imgs/puzzle-arrows/startbtn.jpg');
+    background-size: 100% 100%;
+    z-index: 1;
+}
+
+#restartBtn {
+    color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    height: 260px;
+    background-image: url('../imgs/puzzle-arrows/restart.png');
+    background-size: 100% 100%;
+    z-index: 1;
+}
+
+#gameName {
+    color: white;
+    font-size: 80px;
+    position: absolute;
+    top: calc(25% - 50px);
+    left: 50%;
+    transform: translateX(-50%);
+    animation: gameName 1s ease infinite;
+    -moz-animation: gameName 1s ease infinite;
+    -webkit-animation: gameName 1s ease infinite;
+}
+
+@keyframes gameName {
+
+    0%,
+    100% {
+        text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+        color: #FED128;
+    }
+
+    50% {
+        text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+        color: #806914;
+    }
+}
+
+#scoreSave {
+    background-color: #82c39e;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 40px;
+    width: 169px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
+    margin-top: 5px;
+}
+
+/* 테이블 스타일 */
+#scoreBoard {
+    display: none; /* display 속성을 none으로 설정하여 숨깁니다. */
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* 테이블 헤더 스타일 */
+th {
+    background-color: #333;
+    color: white;
+}
+
+#viewScoreboard {
+    background-color: #82c39e;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 40px;
+    width: 169px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
+    margin-top: 5px;
+}
+
+#exStart {
+    color: #e0dddd;
+    position: absolute;
+    top: calc(46% - 50px);
+    left: 33%;
+    transform: translateX(-50%);
+    -webkit-transform: matrix3d(0.77, 0, 0.64, .001, 0.00, 1, 0.00, 0, -0.64, 0, 0.77, 0, 0, 0, 0, 1);
+    color: #A9FFDC;
+    font-family: clipneon;
+    font-size: 20px;
+    text-shadow: 0vw 0vw 2vw #F40A35;
+    transform: matrix3d(0.77, 0, 0.64, .001, 0.00, 1, 0.00, 0, -0.64, 0, 0.77, 0, 0, 0, 0, 1);
+    text-shadow:
+        -.1vw 0vw .25vw #121313, -.2vw 0vw .25vw #0c0c0c, -.4vw 0vw .25vw #0c0e0d,
+        -.1vw 0vw .1vw #00CC2A, -.2vw 0vw .1vw #00CC2A, -.4vw 0vw .1vw #00CC2A,
+        -.1vw 0vw .8vw #00CC2A, -.2vw 0vw .8vw #00CC2A, -.4vw 0vw .8vw #00CC2A, .2vw 0vw .5vw #00CC2A,
+        -.1vw 0vw .5vw #00CC2A, -.2vw 0vw .5vw #00CC2A, -.4vw 0vw .5vw #00CC2A,
+        -.1vw 0vw 10vw #16FA19, -.2vw 0vw 10vw #16FA19, -.4vw 0vw 10vw #16FA19;
+    font-weight: bold;
+}
+
+#toggleSoundEffect {
+    background-color: #82c39e;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 40px;
+    width: 169px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
+    margin-top: 5px;
+}
+
+#toggleBgMusic {
+    background-color: #82c39e;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 40px;
+    width: 169px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
+    margin-top: 5px;
+}
+
+body {
+    background-color: rgb(162, 160, 160);
+}

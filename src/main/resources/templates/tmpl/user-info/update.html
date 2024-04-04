@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유저 수정</title>
+    <script>
+        function getData() {
+            const formObjs = document.querySelectorAll('input[id], select[id], textarea[id]');
+            const data = {};
+            for (const formObj of formObjs) {
+                if (formObj.type === 'radio') {
+                    if (!data[formObj.name] && document.querySelector(`[name=${formObj.name}]:checked`)) {
+                        data[formObj.name] = document.querySelector(`[name=${formObj.name}]:checked`).value;
+                    }
+                } else if (formObj.type === 'checkbox') {
+                    const checkObjs = document.querySelectorAll(`[name=${formObj.name}]:checked`);
+                    const values = [];
+                    for (const checkObj of checkObjs) {
+                        values.push(checkObj.value);
+                    }
+                    data[formObj.name] = values;
+                } else if (formObj.type === 'select-multiple') {
+                    const selectedObjs = document.querySelectorAll(`[id=${formObj.id}] option:checked`);
+                    const values = [];
+                    for (const selectedObj of selectedObjs) {
+                        values.push(selectedObj.value);
+                    }
+                    data[formObj.id] = values;
+                } else if (formObj.type === 'date') {
+                    // 하이픈 '-' 제거
+                    data[formObj.id] = formObj.value.replace(/-/g, '');
+                } else {
+                    data[formObj.id] = formObj.value;
+                }
+            }
+            return data;
+        }
+        function getJsonFromData() {
+            return JSON.stringify(getData());
+        }
+    </script>
+</head>
+
+<body>
+    <input type="hidden" id="uiNum">
+    <input type="text" id="uiName" placeholder="이름"><br>
+    <input type="text" id="uiPwd" placeholder="패스워드"><br>
+    <input type="text" id="uiMobile" placeholder="전화번호"><br>
+    <input type="text" id="uiEmail" placeholder="이메일"><br>
+    <input type="date" id="uiBirth" placeholder="생일"><br>
+    <button onclick="updateUserInfo()">수정</button>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const uiNum = params.get('uiNum');
+
+        async function updateUserInfo() {
+            const data = getJsonFromData();
+            console.log(data);
+            const response = await fetch('/user-infos', {
+                method: 'PUT',
+                body: data,
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                }
+            });
+            if (response.ok) {
+                alert('회원 정보 수정 성공');
+                location.href = '/tmpl/user-info/list';
+            } else {
+                alert('회원 정보 수정 중 오류 발생');
+            }
+        }
+
+        async function fetchUserInfo() {
+            const res = await fetch(`/user-infos/${uiNum}`);
+            const userInfo = await res.json();
+
+            for (const key in userInfo) {
+                if (document.querySelector(`#${key}`)) {
+                    if(key === 'uiBirth'){
+                       const uiBirth = stringToDate(userInfo[key]);
+                       document.querySelector(`#${key}`).value = uiBirth;
+                    }else{
+                        document.querySelector(`#${key}`).value = userInfo[key];
+                    }
+                }
+            }
+        }
+        function stringToDate(input) {
+            if (input.length !== 8) {
+                return "유효한 생일이 아닙니다.";
+            }
+
+            let year = input.substring(0, 4);
+            let month = input.substring(4, 6);
+            let day = input.substring(6, 8);
+
+            return `${year}-${month}-${day}`;
+        }
+        window.addEventListener('load', fetchUserInfo);
+    </script>
+</body>
+</html>

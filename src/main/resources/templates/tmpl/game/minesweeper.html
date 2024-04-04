@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:href="@{/css/minsweeper-style.css}" rel="stylesheet">
+</head>
+
+<body>
+
+    
+
+    <div class="game-container">
+        <div id="score">
+            <span id="game-over"></span>
+            <span id="game-win"></span>
+        </div>
+        <div>
+        <table border="1" id="scoreBoard">
+            <tr>
+                <td>순위</td>
+                <td>포인트</td>
+                <td>유저 이름</td>
+            </tr>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+        <div id="mineBoard"></div>
+        <div class="gameSet">
+            <input type="hidden" id="game-point">
+            <button id="gameStart">9x9 게임시작</button>
+            <button id="gameStart2">12x12 게임시작</button>
+            <button id="gameStart3">16x16 게임시작</button>
+            
+        </div>
+        <div class="pointSaved">
+            <button onclick="viewScoreboard()" id="viewScoreboard">점수판 보기</button>
+
+            <button onclick="savePoint()">점수 저장</button>
+        </div>
+        <script th:src="@{/js/minesweeper-js.js}"></script>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const giNum = urlParams.get('giNum');
+
+        window.addEventListener('load', async function(){
+            const res = await fetch(`/point-infos/${giNum}`);
+            const points = await res.json();
+            let html ='';
+            for(const [idx, point] of points.entries()){
+                html += '<tr>';
+                    html += '<td>'+(idx+1)+'</td>'
+                    html += '<td>'+point.piPoint+'</td>'
+                    html += '<td>'+point.uiName+'</td>'
+                html += '</tr>';
+            }
+            document.querySelector('#tbody').innerHTML = html;
+        })
+    </script>
+    <script>
+        async function savePoint() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            const data = {
+                giNum : urlParams.get('giNum'),
+                uiNum : urlParams.get('uiNum'),
+                piPoint : document.querySelector('#game-point').value
+            };
+            console.log(data);
+
+            const response = await fetch('/point-infos', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                }
+            });
+            const msg = await response.json();
+            console.log(msg);
+            alert(msg.msg);
+            if (msg.url) {
+                location.href = msg.url;
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+
+

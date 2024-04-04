@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>상세 정보</h3>
+	<table border="1">
+		<tr>
+			<td>번호</td>
+			<td>이름</td>
+			<td>아이디</td>
+			<td>전화번호</td>
+			<td>이메일</td>
+			<td>생일</td>
+			<td>작성일</td>
+			<td>수정일</td>
+		</tr>
+		<tbody id="tBody">
+		</tbody>
+
+	</table>
+	<button id="updateUserBtn">유저수정</button>
+	<button id="deleteUserBtn">유저삭제</button>
+	</div>
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		const uiNum = urlParams.get('uiNum');
+
+		function deleteUser() {
+			let xhr = new XMLHttpRequest();
+			xhr.open('DELETE', `/user-infos/${uiNum}`); // DELETE 요청으로 수정
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						if (xhr.responseText == '1') {
+							alert('삭제완료');
+							// 삭제가 완료되면 list.html로 이동
+							location.href = '/tmpl/user-info/list';
+						} else {
+							alert('에러');
+						}
+					}
+				}
+			}
+			xhr.send();
+		}
+		document.querySelector('#deleteUserBtn').addEventListener('click', deleteUser);
+
+		async function fetchUserInfo() {
+			const res = await fetch(`/user-infos/${uiNum}`);
+			const users = await res.json();
+			let html = '';
+			html += '<tr>';
+			html += `<td>${users.uiNum}</td>`;
+			html += `<td>${users.uiName}</td>`;
+			html += `<td>${users.uiId}</td>`;
+			html += `<td>${users.uiMobile}</td>`;
+			html += `<td>${users.uiEmail}</td>`;
+			html += `<td>${users.uiBirth}</td>`;
+			html += `<td>${users.credat}</td>`;
+			html += `<td>${users.lmodat}</td>`;
+			html += '</tr>';
+
+			document.querySelector('#tBody').innerHTML = html;
+		}
+
+		document.querySelector('#updateUserBtn').addEventListener('click', async function () {
+			window.location.href = `/tmpl/user-info/update?uiNum=${uiNum}`;
+		});
+		document.addEventListener('load', fetchUserInfo());
+	</script>
+</body>
+
+</html>
